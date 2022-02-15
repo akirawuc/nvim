@@ -8,7 +8,11 @@ call plug#begin("~/.vim/plugged")
  Plug 'preservim/nerdcommenter'
  Plug 'davidhalter/jedi-vim'
  Plug 'mhinz/vim-startify'
+ Plug 'mangeshrex/uwu.vim'
+ Plug 'ray-x/lsp_signature.nvim'
  Plug 'neoclide/coc.nvim', {'branch': 'release'}
+ Plug 'kyazdani42/nvim-web-devicons'
+ Plug 'folke/trouble.nvim'
 call plug#end()
 set nocompatible            " disable compatibility to old-time vi
 set showmatch               " show matching 
@@ -34,6 +38,7 @@ set ttyfast                 " Speed up scrolling in Vim
 " set spell                 " enable spell check (may need to download language package)
 " set noswapfile            " disable creating swap file
 " set backupdir=~/.cache/vim " Directory to store backup files.
+colorscheme uwu 
 tnoremap <esc> <C-\><C-N>
 inoremap ;; <esc> 
 autocmd VimEnter * NERDTreeToggle
