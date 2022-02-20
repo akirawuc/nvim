@@ -8,8 +8,10 @@ call plug#begin("~/.vim/plugged")
  Plug 'preservim/nerdcommenter'
  Plug 'davidhalter/jedi-vim'
  Plug 'mhinz/vim-startify'
+ Plug 'ellisonleao/glow.nvim'
  Plug 'mangeshrex/uwu.vim'
  Plug 'ray-x/lsp_signature.nvim'
+ Plug 'easymotion/vim-easymotion'
  Plug 'neoclide/coc.nvim', {'branch': 'release'}
  Plug 'kyazdani42/nvim-web-devicons'
  Plug 'folke/trouble.nvim'
@@ -32,7 +34,7 @@ filetype plugin indent on   "allow auto-indenting depending on file type
 syntax on                   " syntax highlighting
 set mouse=a                 " enable mouse click
 set clipboard=unnamedplus   " using system clipboard
-Filetype plugin on
+filetype plugin on
 set cursorline              " highlight current cursorline
 set ttyfast                 " Speed up scrolling in Vim
 " set spell                 " enable spell check (may need to download language package)
@@ -41,7 +43,10 @@ set ttyfast                 " Speed up scrolling in Vim
 colorscheme uwu 
 tnoremap <esc> <C-\><C-N>
 inoremap ;; <esc> 
-autocmd VimEnter * NERDTreeToggle
+nnoremap <leader>n :NERDTreeFocus<CR>
+nnoremap <C-n> :NERDTree<CR>
+nnoremap <C-t> :NERDTreeToggle<CR>
+nnoremap <C-f> :NERDTreeFind<CR>
 
 lua << EOF
 local autosave = require("autosave")
@@ -49,7 +54,7 @@ local autosave = require("autosave")
 autosave.setup(
     {
         enabled = true,
-        execution_message = "👀AutoSave: saved at " .. vim.fn.strftime("%H:%M:%S"),
+        execution_message = "✅ at " .. vim.fn.strftime("%H:%M:%S"),
         events = {"InsertLeave", "TextChanged"},
         conditions = {
             exists = true,
