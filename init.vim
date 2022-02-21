@@ -17,6 +17,8 @@ call plug#begin("~/.vim/plugged")
  Plug 'neoclide/coc.nvim', {'branch': 'release'}
  Plug 'kyazdani42/nvim-web-devicons'
  Plug 'folke/trouble.nvim'
+ Plug 'akinsho/toggleterm.nvim'
+ Plug 'dense-analysis/ale'
  " AutoCompletion
  Plug 'davidhalter/jedi-vim'
  Plug 'roxma/nvim-yarp'
@@ -65,12 +67,13 @@ au User Ncm2Plugin call ncm2#register_source({
         \ })
 
 
+let g:ale_linters = {'python': ['flake8']}
+let g:toggleterm_terminal_mapping = '<C-t>'
 
 filetype plugin on
 filetype plugin indent on   "allow auto-indenting depending on file type
 
 let g:airline_theme = 'papercolor'
-
 set nocompatible            " disable compatibility to old-time vi
 set showmatch               " show matching 
 set ignorecase              " case insensitive 
