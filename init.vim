@@ -20,6 +20,8 @@ call plug#begin("~/.vim/plugged")
  Plug 'akinsho/toggleterm.nvim'
  Plug 'dense-analysis/ale'
  Plug 'romgrk/barbar.nvim'
+ Plug 'jpalardy/vim-slime', { 'for': 'python' }
+ Plug 'hanschen/vim-ipython-cell', { 'for': 'python' }
  " AutoCompletion
  Plug 'davidhalter/jedi-vim'
  Plug 'roxma/nvim-yarp'
