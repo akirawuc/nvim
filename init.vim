@@ -31,7 +31,7 @@ call plug#begin("~/.vim/plugged")
  Plug 'ncm2/ncm2-jedi'
 call plug#end()
 
-let g:python3_host_prog = '/Users/akirawu/miniforge3/bin/python3'
+let g:python3_host_prog = '/usr/bin/python3'
 autocmd BufEnter * call ncm2#enable_for_buffer()
 " IMPORTANT: :help Ncm2PopupOpen for more information
 set completeopt=noinsert,menuone,noselect
