@@ -21,7 +21,10 @@ call plug#begin("~/.vim/plugged")
  Plug 'dense-analysis/ale'
  Plug 'romgrk/barbar.nvim'
  Plug 'jpalardy/vim-slime', { 'for': 'python' }
+ Plug 'nvim-treesitter/nvim-treesitter'
+ Plug 'SmiteshP/nvim-gps'
  Plug 'hanschen/vim-ipython-cell', { 'for': 'python' }
+ Plug 'numToStr/Comment.nvim'
  " AutoCompletion
  Plug 'davidhalter/jedi-vim'
  Plug 'roxma/nvim-yarp'
@@ -31,6 +34,8 @@ call plug#begin("~/.vim/plugged")
  Plug 'ncm2/ncm2-jedi'
 call plug#end()
 
+" Somewhere after plug#end()
+lua require('Comment').setup()
 let g:python3_host_prog = '/Users/akirawu/miniforge3/bin/python3'
 autocmd BufEnter * call ncm2#enable_for_buffer()
 " IMPORTANT: :help Ncm2PopupOpen for more information
@@ -71,7 +76,7 @@ au User Ncm2Plugin call ncm2#register_source({
 
 
 let g:ale_linters = {'python': ['flake8']}
-let g:toggleterm_terminal_mapping = '<C-t>'
+let g:toggleterm_terminal_mapping = '<C-y>'
 
 filetype plugin on
 filetype plugin indent on   "allow auto-indenting depending on file type
@@ -118,6 +123,7 @@ map <Leader> <Plug>(easymotion-prefix)
 lua << EOF
 local autosave = require("autosave")
 
+
 autosave.setup(
     {
         enabled = true,
@@ -134,6 +140,9 @@ autosave.setup(
         clean_command_line_interval = 0,
         debounce_delay = 135
     }
+
 )
+require('Comment').setup()
+
 EOF
 
