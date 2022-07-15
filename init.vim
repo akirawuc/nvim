@@ -20,7 +20,6 @@ call plug#begin("~/.vim/plugged")
  Plug 'akinsho/toggleterm.nvim'
  Plug 'dense-analysis/ale'
  Plug 'romgrk/barbar.nvim'
- Plug 'jpalardy/vim-slime', { 'for': 'python' }
  Plug 'nvim-treesitter/nvim-treesitter'
  Plug 'SmiteshP/nvim-gps'
  Plug 'hanschen/vim-ipython-cell', { 'for': 'python' }
@@ -32,6 +31,10 @@ call plug#begin("~/.vim/plugged")
  Plug 'ncm2/ncm2-bufword'
  Plug 'ncm2/ncm2-path'
  Plug 'ncm2/ncm2-jedi'
+ " interactive shell
+ Plug 'sillybun/vim-repl'
+ " rust
+ Plug 'rust-lang/rust.vim'
 call plug#end()
 
 " Somewhere after plug#end()
@@ -112,12 +115,12 @@ inoremap ;; <esc>
 nnoremap <leader>n :NERDTreeFocus<CR>
 nnoremap <C-n> :NERDTree<CR>
 nnoremap <C-t> :NERDTreeToggle<CR>
-nnoremap <C-f> :NERDTreeFind<CR>
+" nnoremap <C-f> :NERDTreeFind<CR>
 nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
-
+nnoremap <space> za <CR>
 map <Leader> <Plug>(easymotion-prefix)
 
 lua << EOF
