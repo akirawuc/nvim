@@ -1,76 +1,66 @@
+
 call plug#begin("~/.vim/plugged")
- " Plugin Section
- Plug 'shaeinst/roshnivim-cs'
- Plug '907th/vim-auto-save'
+
+ Plug 'tpope/vim-sensible'
+ Plug 'tpope/vim-surround'
+ Plug 'tpope/vim-commentary'
+ Plug 'tpope/vim-abolish'
+
+ " appearance
  Plug 'ryanoasis/vim-devicons'
  Plug 'kyazdani42/nvim-web-devicons'
- Plug 'scrooloose/nerdtree'
- Plug 'preservim/nerdcommenter'
- Plug 'mhinz/vim-startify'
- Plug 'luisiacc/gruvbox-baby', {'branch': 'main'}
- Plug 'ray-x/lsp_signature.nvim'
  Plug 'vim-airline/vim-airline'
  Plug 'vim-airline/vim-airline-themes'
+ Plug 'morhetz/gruvbox'
+
+ " useful tools
+ Plug '907th/vim-auto-save'
+ Plug 'scrooloose/nerdtree'
+ Plug 'preservim/nerdcommenter'
  Plug 'easymotion/vim-easymotion'
+
+ Plug 'mhinz/vim-startify'
+ Plug 'ray-x/lsp_signature.nvim'
  Plug 'neoclide/coc.nvim', {'branch': 'release'}
  Plug 'folke/trouble.nvim'
  Plug 'akinsho/toggleterm.nvim'
- Plug 'dense-analysis/ale'
- " Plug 'romgrk/barbar.nvim'
- " Plug 'neovim/nvim-lspconfig'
- " Plug 'SmiteshP/nvim-navic'
- " AutoCompletion
  Plug 'davidhalter/jedi-vim'
  Plug 'roxma/nvim-yarp'
- Plug 'ncm2/ncm2'
- Plug 'ncm2/ncm2-bufword'
- Plug 'ncm2/ncm2-path'
- Plug 'ncm2/ncm2-jedi'
- " interactive shell
- Plug 'sillybun/vim-repl'
  " rust
  Plug 'rust-lang/rust.vim'
+ " js related
+ "
+ Plug 'neoclide/jsonc.vim'
+ Plug 'othree/html5.vim'
+ Plug 'pangloss/vim-javascript'
+ Plug 'MaxMEllon/vim-jsx-pretty'
+ Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
+ Plug 'leafgarland/typescript-vim'
+ Plug 'peitalin/vim-jsx-typescript'
+ Plug 'TovarishFin/vim-solidity'
 call plug#end()
 
 
+set encoding=utf8
+setglobal fileencoding=utf-8
+
+"
 " auto save
 let g:auto_save = 1  " enable AutoSave on Vim startup
 " .vimrc
 let g:auto_save_events = ["InsertLeave", "TextChanged"]
+" auto save end
+" 
 
 let g:python3_host_prog = '/Users/akirawu/miniforge3/bin/python3'
 
-autocmd BufEnter * call ncm2#enable_for_buffer()
-" IMPORTANT: :help Ncm2PopupOpen for more information
-set completeopt=noinsert,menuone,noselect
-set shortmess+=c
-inoremap <c-c> <ESC>
 
-" make it fast
-let ncm2#popup_delay = 5
-let ncm2#complete_length = [[1, 1]]
-" Use new fuzzy based matches
-let g:ncm2#matcher = 'substrfuzzy'
-set encoding=utf8
-setglobal fileencoding=utf-8
-
-au User Ncm2Plugin call ncm2#register_source({
-        \ 'name' : 'css',
-        \ 'priority': 9,
-        \ 'subscope_enable': 1,
-        \ 'scope': ['css','scss'],
-        \ 'mark': 'css',
-        \ 'word_pattern': '[\w\-]+',
-        \ 'complete_pattern': ':\s*',
-        \ 'on_complete': ['ncm2#on_complete#omni', 'csscomplete#CompleteCSS'],
-        \ })
-
-
-let g:ale_linters = {'python': ['flake8']}
-let g:toggleterm_terminal_mapping = '<C-y>'
-
-
-" colorscheme roshnivim-cs
+" lightline
+let g:lightline = {
+      \ 'colorscheme': 'gruvbox',
+      \ }
+set background=dark
+colorscheme gruvbox
 
 filetype plugin on
 filetype plugin indent on   "allow auto-indenting depending on file type
@@ -113,4 +103,31 @@ nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 nnoremap <space> za <CR>
 map <Leader> <Plug>(easymotion-prefix)
+map  <Leader>w <Plug>(easymotion-bd-w)
+nmap <Leader>w <Plug>(easymotion-overwin-w)
 
+"
+" coc
+" Use tab for trigger completion with characters ahead and navigate.
+inoremap <silent><expr> <TAB>
+      \ coc#pum#visible() ? coc#pum#next(1):
+      \ CheckBackspace() ? "\<Tab>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
+
+function! CheckBackspace() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+" Use <c-space> to trigger completion.
+if has('nvim')
+  inoremap <silent><expr> <c-space> coc#refresh()
+else
+  inoremap <silent><expr> <c-@> coc#refresh()
+endif
+" GoTo code navigation.
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
