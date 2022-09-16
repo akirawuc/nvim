@@ -1,29 +1,24 @@
 call plug#begin("~/.vim/plugged")
  " Plugin Section
- Plug 'Pocco81/AutoSave.nvim'
+ Plug 'shaeinst/roshnivim-cs'
+ Plug '907th/vim-auto-save'
  Plug 'ryanoasis/vim-devicons'
- Plug 'SirVer/ultisnips'
- Plug 'honza/vim-snippets'
+ Plug 'kyazdani42/nvim-web-devicons'
  Plug 'scrooloose/nerdtree'
  Plug 'preservim/nerdcommenter'
  Plug 'mhinz/vim-startify'
- Plug 'ellisonleao/glow.nvim'
- Plug 'mangeshrex/uwu.vim'
  Plug 'luisiacc/gruvbox-baby', {'branch': 'main'}
  Plug 'ray-x/lsp_signature.nvim'
  Plug 'vim-airline/vim-airline'
  Plug 'vim-airline/vim-airline-themes'
  Plug 'easymotion/vim-easymotion'
  Plug 'neoclide/coc.nvim', {'branch': 'release'}
- Plug 'kyazdani42/nvim-web-devicons'
  Plug 'folke/trouble.nvim'
  Plug 'akinsho/toggleterm.nvim'
  Plug 'dense-analysis/ale'
- Plug 'romgrk/barbar.nvim'
- Plug 'nvim-treesitter/nvim-treesitter'
- Plug 'SmiteshP/nvim-gps'
- Plug 'hanschen/vim-ipython-cell', { 'for': 'python' }
- Plug 'numToStr/Comment.nvim'
+ " Plug 'romgrk/barbar.nvim'
+ " Plug 'neovim/nvim-lspconfig'
+ " Plug 'SmiteshP/nvim-navic'
  " AutoCompletion
  Plug 'davidhalter/jedi-vim'
  Plug 'roxma/nvim-yarp'
@@ -37,35 +32,28 @@ call plug#begin("~/.vim/plugged")
  Plug 'rust-lang/rust.vim'
 call plug#end()
 
-" Somewhere after plug#end()
-lua require('Comment').setup()
+
+" auto save
+let g:auto_save = 1  " enable AutoSave on Vim startup
+" .vimrc
+let g:auto_save_events = ["InsertLeave", "TextChanged"]
+
 let g:python3_host_prog = '/Users/akirawu/miniforge3/bin/python3'
+
 autocmd BufEnter * call ncm2#enable_for_buffer()
 " IMPORTANT: :help Ncm2PopupOpen for more information
 set completeopt=noinsert,menuone,noselect
 set shortmess+=c
 inoremap <c-c> <ESC>
+
 " make it fast
 let ncm2#popup_delay = 5
 let ncm2#complete_length = [[1, 1]]
 " Use new fuzzy based matches
 let g:ncm2#matcher = 'substrfuzzy'
+set encoding=utf8
+setglobal fileencoding=utf-8
 
-" When the <Enter> key is pressed while the popup menu is visible, it only
-" hides the menu. Use this mapping to close the menu and also start a new
-" line.
-inoremap <expr> <CR> (pumvisible() ? "\<c-y>\<cr>" : "\<CR>")
-
-" Use <TAB> to select the popup menu:
-inoremap <silent><expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-
-" wrap existing omnifunc
-" Note that omnifunc does not run in background and may probably block the
-" editor. If you don't want to be blocked by omnifunc too often, you could
-" add 180ms delay before the omni wrapper:
-"  'on_complete': ['ncm2#on_complete#delay', 180,
-"               \ 'ncm2#on_complete#omni', 'csscomplete#CompleteCSS'],
 au User Ncm2Plugin call ncm2#register_source({
         \ 'name' : 'css',
         \ 'priority': 9,
@@ -81,10 +69,14 @@ au User Ncm2Plugin call ncm2#register_source({
 let g:ale_linters = {'python': ['flake8']}
 let g:toggleterm_terminal_mapping = '<C-y>'
 
+
+" colorscheme roshnivim-cs
+
 filetype plugin on
 filetype plugin indent on   "allow auto-indenting depending on file type
 
 let g:airline_theme = 'papercolor'
+let s:fontsize = 10
 set nocompatible            " disable compatibility to old-time vi
 set showmatch               " show matching 
 set ignorecase              " case insensitive 
@@ -108,7 +100,6 @@ set ttyfast                 " Speed up scrolling in Vim
 " set noswapfile            " disable creating swap file
 " set backupdir=~/.cache/vim " Directory to store backup files.
 
-colorscheme gruvbox-baby 
 
 tnoremap <esc> <C-\><C-N>
 inoremap ;; <esc> 
@@ -122,30 +113,4 @@ nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 nnoremap <space> za <CR>
 map <Leader> <Plug>(easymotion-prefix)
-
-lua << EOF
-local autosave = require("autosave")
-
-
-autosave.setup(
-    {
-        enabled = true,
-        execution_message = "✅ at " .. vim.fn.strftime("%H:%M:%S"),
-        events = {"InsertLeave", "TextChanged"},
-        conditions = {
-            exists = true,
-            filename_is_not = {},
-            filetype_is_not = {},
-            modifiable = true
-        },
-        write_all_buffers = false,
-        on_off_commands = true,
-        clean_command_line_interval = 0,
-        debounce_delay = 135
-    }
-
-)
-require('Comment').setup()
-
-EOF
 
