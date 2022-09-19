@@ -18,6 +18,7 @@ call plug#begin("~/.vim/plugged")
  Plug 'scrooloose/nerdtree'
  Plug 'preservim/nerdcommenter'
  Plug 'easymotion/vim-easymotion'
+ Plug 'voldikss/vim-floaterm'
 
  Plug 'mhinz/vim-startify'
  Plug 'ray-x/lsp_signature.nvim'
@@ -103,8 +104,8 @@ nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 nnoremap <space> za <CR>
 map <Leader> <Plug>(easymotion-prefix)
-map  <Leader>w <Plug>(easymotion-bd-w)
-nmap <Leader>w <Plug>(easymotion-overwin-w)
+" map  <Leader>w <Plug>(easymotion-bd-w)
+" nmap <Leader>w <Plug>(easymotion-overwin-w)
 
 "
 " coc
@@ -131,3 +132,13 @@ nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
+
+" floaterm settings: mapping
+nnoremap   <silent>   <F7>    :FloatermNew<CR>
+tnoremap   <silent>   <F7>    <C-\><C-n>:FloatermNew<CR>
+nnoremap   <silent>   <F8>    :FloatermPrev<CR>
+tnoremap   <silent>   <F8>    <C-\><C-n>:FloatermPrev<CR>
+nnoremap   <silent>   <F9>    :FloatermNext<CR>
+tnoremap   <silent>   <F9>    <C-\><C-n>:FloatermNext<CR>
+nnoremap   <silent>   <F12>   :FloatermToggle<CR>
+tnoremap   <silent>   <F12>   <C-\><C-n>:FloatermToggle<CR>
