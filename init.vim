@@ -66,7 +66,7 @@ colorscheme gruvbox
 filetype plugin on
 filetype plugin indent on   "allow auto-indenting depending on file type
 
-let g:airline_theme = 'papercolor'
+let g:airline_theme = 'base16'
 let s:fontsize = 10
 set nocompatible            " disable compatibility to old-time vi
 set showmatch               " show matching 
@@ -106,6 +106,15 @@ nnoremap <space> za <CR>
 map <Leader> <Plug>(easymotion-prefix)
 " map  <Leader>w <Plug>(easymotion-bd-w)
 " nmap <Leader>w <Plug>(easymotion-overwin-w)
+
+" buffer
+set hidden
+nnoremap <silent> bl :ls<CR>
+nnoremap <silent> bn :bnext<CR>
+nnoremap <silent> bp :bprevious<CR>
+nnoremap <silent> bd :bdelete<CR>
+let g:airline#extensions#tabline#enabled=1
+let g:airline#extensions#tabline#buffer_nr_show=1
 
 "
 " coc
