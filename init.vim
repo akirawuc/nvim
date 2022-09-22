@@ -1,4 +1,3 @@
-
 call plug#begin("~/.vim/plugged")
 
  Plug 'tpope/vim-sensible'
@@ -16,7 +15,6 @@ call plug#begin("~/.vim/plugged")
  " useful tools
  Plug '907th/vim-auto-save'
  Plug 'scrooloose/nerdtree'
- Plug 'preservim/nerdcommenter'
  Plug 'easymotion/vim-easymotion'
  Plug 'voldikss/vim-floaterm'
 
@@ -80,6 +78,7 @@ set expandtab               " converts tabs to white space
 set shiftwidth=4            " width for autoindents
 set autoindent              " indent a new line the same amount as the line just typed
 set number                  " add line numbers
+set relativenumber          " setting the displayed line number to relative
 " set wildmode=longest,list   " get bash-like tab completions
 set cc=80                  " set an 80 column border for good coding style
 syntax on                   " syntax highlighting
@@ -116,14 +115,19 @@ nnoremap <silent> bd :bdelete<CR>
 let g:airline#extensions#tabline#enabled=1
 let g:airline#extensions#tabline#buffer_nr_show=1
 
-"
 " coc
 " Use tab for trigger completion with characters ahead and navigate.
 inoremap <silent><expr> <TAB>
       \ coc#pum#visible() ? coc#pum#next(1):
       \ CheckBackspace() ? "\<Tab>" :
       \ coc#refresh()
+
+" Use shift-tab to go to the previous selection
 inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
+
+" Use enter to select the highlighting selection
+inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
+                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
 function! CheckBackspace() abort
   let col = col('.') - 1
