@@ -4,13 +4,14 @@ call plug#begin("~/.vim/plugged")
  Plug 'tpope/vim-surround'
  Plug 'tpope/vim-commentary'
  Plug 'tpope/vim-abolish'
+ Plug 'github/copilot.vim'
 
  " appearance
  Plug 'ryanoasis/vim-devicons'
- Plug 'kyazdani42/nvim-web-devicons'
- Plug 'vim-airline/vim-airline'
+ Plug 'kyazdani42/nvim-web-devicons' Plug 'vim-airline/vim-airline'
  Plug 'vim-airline/vim-airline-themes'
  Plug 'morhetz/gruvbox'
+ Plug 'hachy/eva01.vim', { 'branch': 'main' }
 
  " useful tools
  Plug '907th/vim-auto-save'
@@ -23,8 +24,8 @@ call plug#begin("~/.vim/plugged")
  Plug 'neoclide/coc.nvim', {'branch': 'release'}
  Plug 'folke/trouble.nvim'
  Plug 'akinsho/toggleterm.nvim'
- Plug 'davidhalter/jedi-vim'
- Plug 'roxma/nvim-yarp'
+ " Plug 'davidhalter/jedi-vim'
+ " Plug 'roxma/nvim-yarp'
  " rust
  Plug 'rust-lang/rust.vim'
  " js related
@@ -92,7 +93,6 @@ set ttyfast                 " Speed up scrolling in Vim
 
 
 tnoremap <esc> <C-\><C-N>
-inoremap ;; <esc> 
 nnoremap <leader>n :NERDTreeFocus<CR>
 nnoremap <C-n> :NERDTree<CR>
 nnoremap <C-t> :NERDTreeToggle<CR>
@@ -103,8 +103,8 @@ nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 nnoremap <space> za <CR>
 map <Leader> <Plug>(easymotion-prefix)
-" map  <Leader>w <Plug>(easymotion-bd-w)
-" nmap <Leader>w <Plug>(easymotion-overwin-w)
+map  <Leader>w <Plug>(easymotion-bd-w)
+nmap <Leader>w <Plug>(easymotion-overwin-w)
 
 " buffer
 set hidden
@@ -126,8 +126,8 @@ inoremap <silent><expr> <TAB>
 inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
 
 " Use enter to select the highlighting selection
-inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
-                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+" inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
+                              " \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
 function! CheckBackspace() abort
   let col = col('.') - 1
