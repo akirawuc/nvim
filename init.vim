@@ -5,6 +5,7 @@ call plug#begin("~/.vim/plugged")
  Plug 'tpope/vim-commentary'
  Plug 'tpope/vim-abolish'
  Plug 'github/copilot.vim'
+ Plug 'nvim-lua/plenary.nvim'
 
  " appearance
  Plug 'ryanoasis/vim-devicons'
