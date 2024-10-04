@@ -43,6 +43,13 @@ require('packer').startup(function()
   use 'leafgarland/typescript-vim'
   use 'peitalin/vim-jsx-typescript'
   use 'TovarishFin/vim-solidity'
+  use {
+  "pmizio/typescript-tools.nvim",
+  requires = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
+  config = function()
+    require("typescript-tools").setup {}
+  end,
+ }
 end)
 
 -- General settings
